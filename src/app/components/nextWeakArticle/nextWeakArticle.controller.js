@@ -9,8 +9,10 @@ module.exports = function NextWeakArticleController($scope, Article) {
         if (newId && newId !== oldId) {
             Article.get(newId).then(function(article) {
                 nextWeakArticleController.article = article;
+                $scope.$apply();
             }).catch(function() {
                 nextWeakArticleController.article = null;
+                $scope.$apply();
             });
         }
     });

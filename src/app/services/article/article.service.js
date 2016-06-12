@@ -1,48 +1,49 @@
 'use strict';
 
-module.exports = function Article($q) {
-    var articles = [
-        {
-            id: 1,
-            title: 'Introduction',
-            text: 'This is the intro.'
-        }, {
-            id: 2,
-            title: 'Quickstart',
-            text: 'This is the quickstart. Some more'
-        }, {
-            id: 3,
-            title: 'Setup',
-            text: 'This is the setup.'
-        }];
+var PouchDb = require('pouchdb');
+
+module.exports = function Article() {
+    var article = this;
+
+    function init() {
+        article.db = new PouchDb('articles');
+
+        return article.db.info().then(function(info) {
+            if (info.doc_count === 0) {
+                return article.db.bulkDocs([
+                    { title: 'Introduction', text: 'This is the intro.' },
+                    { title: 'Quickstart', text: 'This is the quickstart. Some more' },
+                    { title: 'Setup', text: 'This is the setup.' }
+                ]);
+            }
+        });
+    }
 
     function getMenuItems() {
-        return $q(function(resolve) {
-            var menuItems = articles.map(function(article) {
+        return article.initializing.then(function() {
+            return article.db.allDocs({
+                include_docs: true,
+                descending: true
+            });
+        }).then(function(result) {
+            return result.rows.map(function(article) {
                 return {
-                    id: article.id,
-                    title: article.title
+                    id: article.doc._id,
+                    title: article.doc.title
                 };
             });
-            resolve(menuItems);
+        }).catch(function() {
+            return [];
         });
     }
 
     function get(id) {
-        return $q(function(resolve, reject) {
-            var foundArticle = null;
-            articles.forEach(function(article) {
-                if (article.id === id) {
-                    foundArticle = article;
-                }
-            });
-            if (foundArticle) {
-                resolve(foundArticle);
-            } else {
-                reject('not found');
-            }
+        return article.initializing.then(function() {
+            return article.db.get(id);
         });
     }
+
+    article.initializing = init();
 
     return {
         getMenuItems: getMenuItems,
