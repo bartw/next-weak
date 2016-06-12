@@ -5,7 +5,7 @@ module.exports = function Article($q) {
         {
             id: 1,
             title: 'Introduction',
-            text: '<p>This is the intro.</p><p>next intro</p>'
+            text: 'This is the intro.'
         }, {
             id: 2,
             title: 'Quickstart',
