@@ -50,13 +50,13 @@ with open(directory + name + '.controller.js', 'a+') as controller:
     controller.write("module.exports = function " + capitalizedName + "Controller() {\n")
     controller.write("};\n")
     
-with open(directory + name + 'spec.js', 'a+') as spec:
+with open(directory + name + '.spec.js', 'a+') as spec:
     spec.write("'use strict';\n")
     spec.write("\n")
     spec.write("require('../../app.js');\n")
     spec.write("\n")
     spec.write("describe('" + name + "', function() {\n")
-    spec.write("    beforeEach(angular.mock.module('" + name + "'));\n")
+    spec.write("    beforeEach(angular.mock.module('app'));\n")
     spec.write("\n")
     spec.write("    describe('with $compile', function() {\n")
     spec.write("        var $compile, $rootScope, element, scope;\n")

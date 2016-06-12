@@ -3,7 +3,7 @@
 require('../../app.js');
 
 describe('nextWeak', function() {
-    beforeEach(angular.mock.module('nextWeak'));
+    beforeEach(angular.mock.module('app'));
 
     describe('with $compile', function() {
         var $compile, $rootScope, element, scope;

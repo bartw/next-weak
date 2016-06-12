@@ -1,0 +1,7 @@
+<div class="next-weak-menu">
+    <ul>
+        <li ng-repeat="item in $ctrl.items" ng-class="{selected: $ctrl.isSelected(item.id)}" ng-click="$ctrl.onSelect({id: item.id})">
+            {{item.title}}
+        </li>
+    </ul>
+</div>
