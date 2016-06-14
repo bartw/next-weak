@@ -3,5 +3,8 @@
         <li ng-repeat="item in $ctrl.items" ng-class="{selected: $ctrl.isSelected(item.id)}" ng-click="$ctrl.onSelect({id: item.id})">
             <a href="#/article/{{item.id}}">{{item.title}}</a>
         </li>
+        <li>
+            <a href="#/article/new">new</a>
+        </li>
     </ul>
 </div>

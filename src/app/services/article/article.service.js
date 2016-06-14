@@ -42,11 +42,18 @@ module.exports = function Article() {
             return article.db.get(id);
         });
     }
+    
+    function save(newArticle) {
+        return article.initializing.then(function() {
+            return article.db.post(newArticle);
+        });
+    }
 
     article.initializing = init();
 
     return {
         getMenuItems: getMenuItems,
-        get: get
+        get: get,
+        save: save
     };
 };

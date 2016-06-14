@@ -9,6 +9,9 @@ var Components = require('./components/components');
 angular.module('app', ['ngRoute', Services.name, Components.name])
     .config(function($routeProvider) {
         $routeProvider
+            .when('/article/new', {
+                template: '<next-weak-new-article></next-weak-new-article>'
+            })
             .when('/article/:articleId', {
                 template: '<next-weak-article article="$resolve.article"></next-weak-article>',
                 resolve: {
