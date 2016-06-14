@@ -3,9 +3,7 @@
         <h1>next weak</h1>
         <next-weak-menu selected-id="$ctrl.selectedId" on-select="$ctrl.onSelect(id)"></next-weak-menu>
     </div>
-    <div class="main">
-        <next-weak-article id="$ctrl.selectedId"></next-weak-article>
-    </div>
+    <div class="main" ng-view></div>
     <div class="footer">
         <p>
             <a href="https://github.com/bartw/next-weak">fork me</a>

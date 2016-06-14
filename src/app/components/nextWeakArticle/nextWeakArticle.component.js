@@ -5,7 +5,7 @@ var controller = require('./nextWeakArticle.controller');
 module.exports = {
     template: require('./nextWeakArticle.html'),
     bindings: { 
-        id: '<'
+        article: '<'
     },
     controller: controller
 };
